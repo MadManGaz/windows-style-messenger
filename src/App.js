@@ -1,30 +1,20 @@
-import './App.css';
+import "./App.css";
+import { testData } from "./util/testData.json";
 
-const testData = [
-  {
-    firstName: 'Gary',
-    lastName: 'Moore',
-    age: 24
-  },
-  {
-    firstName: 'Steven',
-    lastName: 'Stove',
-    age: 42
-  }
-]
-
-const NameList = ({people}) => {
+const NameList = ({ people }) => {
   return (
     <div>
-      {people.map(person => {
+      {people.map((person) => (
         <div>
-          <h1>{person.firstName} {person.lastName}</h1>
+          <h1>
+            {person.firstName} {person.lastName}
+          </h1>
           <p>{person.age}</p>
         </div>
-      })}
+      ))}
     </div>
-  )
-}
+  );
+};
 
 function App() {
   return (
