@@ -1,22 +1,36 @@
-import logo from './logo.svg';
 import './App.css';
+
+const testData = [
+  {
+    firstName: 'Gary',
+    lastName: 'Moore',
+    age: 24
+  },
+  {
+    firstName: 'Steven',
+    lastName: 'Stove',
+    age: 42
+  }
+]
+
+const NameList = ({people}) => {
+  return (
+    <div>
+      {people.map(person => {
+        <div>
+          <h1>{person.firstName} {person.lastName}</h1>
+          <p>{person.age}</p>
+        </div>
+      })}
+    </div>
+  )
+}
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <NameList people={testData} />
       </header>
     </div>
   );
