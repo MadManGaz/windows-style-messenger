@@ -4,7 +4,7 @@ import { testData } from "./util/testData.json";
 const NameList = ({ people }) => {
   return (
     <div>
-      {people.map((person) => (
+      {people.map((person) => ( 
         <div>
           <h1>
             {person.firstName} {person.lastName}
