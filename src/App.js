@@ -1,47 +1,84 @@
 import { useState } from "react";
+import "xp.css/dist/98.css";
 import "./App.css";
-import { testMessages } from "./util/testMessages.json";
 
 const Message = ({ username, message }) => {
   return (
-    <div className="Card">
-      <div className="MessageHeader">
-        <p>{username}</p>
-      </div>
-      <div>
-        <p className='MessageContent'>{message}</p>
-      </div>
+    <div className="card">
+      <div className="message-header">{username}</div>
+      <div className="message-content">{message}</div>
     </div>
   );
 };
 
 const Messages = ({ messages }) => {
-  return messages.map((message) => (
-    <Message username={message.username} message={message.message} />
-  ));
+  return (
+    <div className="messages">
+      {messages.map((message) => {
+        return (
+          <Message username={message.username} message={message.message} />
+        );
+      })}
+    </div>
+  );
 };
 
 const SendBox = ({ handleSend }) => {
-  return (
-    <div>
-      <input type="text" />
+  const [message, setMessage] = useState("");
+  const username = "sample_name";
 
+  return (
+    <div className="send-box">
+      <label htmlFor="message_content">Message:</label>
+      <input
+        id="message_content"
+        type="text"
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+      />
+      <button
+        onClick={() => handleSend({ username: username, message: message })}
+      >
+        Send
+      </button>
+      <p>{message}</p>
     </div>
-  )
-}
+  );
+};
 
 function App() {
-  let messages = useState(...testMessages);
+  const [messages, setMessages] = useState([
+    { username: "Gary Moore", message: "test-content" },
+    { username: "Steven Stove", message: "A good feed!" },
+  ]);
+
   const handleSend = (message) => {
-    messages = [...messages, message]
+    console.log(`Sent the message "${message.message}"`);
+    setMessages([...messages, message]);
   };
 
   return (
-    <div className="App">
-      <Messages messages={messages} />
+    <ClassicWindow windowTitle="Messenger">
       <SendBox handleSend={handleSend} />
-    </div>
+      <Messages messages={messages} />
+    </ClassicWindow>
   );
 }
+
+const ClassicWindow = ({ windowTitle, children }) => {
+  return (
+    <div className="window">
+      <div className="title-bar">
+        <div className="title-bar-text">{windowTitle}</div>
+        <div className="title-bar-controls">
+          <button aria-label="Minimize"></button>
+          <button aria-label="Maximize"></button>
+          <button aria-label="Close"></button>
+        </div>
+      </div>
+      <div className="window-body">{children}</div>
+    </div>
+  );
+};
 
 export default App;
