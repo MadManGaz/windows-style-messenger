@@ -2,6 +2,17 @@
   text-align: center;
 }
 
+.send-box {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .card {
   padding: 20px;
   margin: 20px;
@@ -22,4 +33,21 @@
 
 .message-content {
   padding-left: 15px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .logo {
+    height: 100px;
+    animation: logo-spin infinite 10s linear;
+    color: black;
+  }
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

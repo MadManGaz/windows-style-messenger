@@ -1,6 +1,22 @@
+import { ReactComponent as Logo } from "./logo.svg";
 import { useState } from "react";
-import "xp.css/dist/98.css";
+import PropTypes from "prop-types";
+import "xp.css/dist/XP.css";
 import "./App.css";
+
+/** Simple app header */
+const Header = ({ profilePicture }) => {
+  return (
+    <div className="header">
+      <h4>Messenger</h4>
+      <Logo className="logo" />
+    </div>
+  );
+};
+
+Header.propTypes = {
+  profilePicture: PropTypes.string,
+};
 
 const Message = ({ username, message }) => {
   return (
@@ -9,6 +25,11 @@ const Message = ({ username, message }) => {
       <div className="message-content">{message}</div>
     </div>
   );
+};
+
+Message.propTypes = {
+  username: PropTypes.string.isRequired,
+  message: PropTypes.string.isRequired,
 };
 
 const Messages = ({ messages }) => {
@@ -32,6 +53,7 @@ const SendBox = ({ handleSend }) => {
       <label htmlFor="message_content">Message:</label>
       <input
         id="message_content"
+        className="message-text-box"
         type="text"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
@@ -41,7 +63,22 @@ const SendBox = ({ handleSend }) => {
       >
         Send
       </button>
-      <p>{message}</p>
+    </div>
+  );
+};
+
+const ClassicWindow = ({ windowTitle, children }) => {
+  return (
+    <div className="window">
+      <div className="title-bar">
+        <div className="title-bar-text">{windowTitle}</div>
+        <div className="title-bar-controls">
+          <button aria-label="Minimize" />
+          <button aria-label="Maximize" />
+          <button aria-label="Close" />
+        </div>
+      </div>
+      <div className="window-body">{children}</div>
     </div>
   );
 };
@@ -58,27 +95,14 @@ function App() {
   };
 
   return (
-    <ClassicWindow windowTitle="Messenger">
-      <SendBox handleSend={handleSend} />
-      <Messages messages={messages} />
-    </ClassicWindow>
-  );
-}
-
-const ClassicWindow = ({ windowTitle, children }) => {
-  return (
-    <div className="window">
-      <div className="title-bar">
-        <div className="title-bar-text">{windowTitle}</div>
-        <div className="title-bar-controls">
-          <button aria-label="Minimize"></button>
-          <button aria-label="Maximize"></button>
-          <button aria-label="Close"></button>
-        </div>
-      </div>
-      <div className="window-body">{children}</div>
+    <div>
+      <ClassicWindow windowTitle="Messenger">
+        <Header />
+        <Messages messages={messages} />
+        <SendBox handleSend={handleSend} />
+      </ClassicWindow>
     </div>
   );
-};
+}
 
 export default App;
