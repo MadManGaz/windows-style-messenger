@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const ClassicWindow = ({ windowTitle, children }) => {
+const ClassicWindow = ({ windowWidth, windowTitle, children }) => {
   return (
-    <div className="window">
+    <div style={{ width: windowWidth, margin: "50px" }} className="window">
       <div className="title-bar">
         <div className="title-bar-text">{windowTitle}</div>
         <div className="title-bar-controls">
@@ -18,6 +18,7 @@ const ClassicWindow = ({ windowTitle, children }) => {
 };
 
 ClassicWindow.propTypes = {
+  windowWidth: PropTypes.number,
   windowTitle: PropTypes.string,
   children: PropTypes.object,
 };

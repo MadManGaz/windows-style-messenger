@@ -19,7 +19,7 @@ function App() {
 
   return (
     <div>
-      <ClassicWindow windowTitle="Messenger">
+      <ClassicWindow windowWidth={300} windowTitle="Messenger">
         <Header />
         <Messages messages={messages} />
         <SendBox handleSend={handleSend} />
